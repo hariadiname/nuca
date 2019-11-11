@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="344.04" height="159.547" viewBox="0 0 344.04 159.547">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.137" y1="0.181" x2="0.847" y2="0.858" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1e90ff"/>
+      <stop offset="0.492" stop-color="#1874ce"/>
+      <stop offset="1" stop-color="#0f4880"/>
+    </linearGradient>
+  </defs>
+  <g id="Logo_nuca" data-name="Logo nuca" transform="translate(-185 -125)">
+    <rect id="Latar" width="124" height="124" rx="62" transform="translate(185 160.547)" fill="url(#linear-gradient)"/>
+    <text id="n" transform="translate(211.04 253)" fill="#fff" font-size="119" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="0" y="0">n</tspan></text>
+    <text id="nuca" transform="translate(328.04 248)" fill="#1e90ff" font-size="90" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="0" y="0">nuca</tspan></text>
+  </g>
+</svg>
