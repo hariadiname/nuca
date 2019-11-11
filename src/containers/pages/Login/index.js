@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import "./Login.css";
 import Button from "../../../components/Button";
+import { userLoginAPI } from "../../../configs/redux/action";
 
 class Login extends Component {
   state = {
@@ -15,13 +17,22 @@ class Login extends Component {
     });
   };
 
-  handleLoginSubmit = () => {
-    console.log("Email : ", this.state.email);
-    console.log("Password : ", this.state.password);
-    this.setState({
-      email: "",
-      password: ""
-    });
+  handleLoginSubmit = async () => {
+    const { email, password } = this.state;
+    const { history } = this.props;
+    const res = await this.props.userLoginAPI({ email, password });
+    if (res) {
+      // console.log("success login : ", res);
+      localStorage.setItem("userData", JSON.stringify(res));
+      this.setState({
+        email: "",
+        password: ""
+      });
+      history.push("/");
+    } else {
+      // console.log("login failed : ", res);
+      history.push("/login");
+    }
   };
 
   render() {
@@ -51,7 +62,11 @@ class Login extends Component {
             <div className="garis-input"></div>
           </div>
           <div className="form-group">
-            <Button onClick={this.handleLoginSubmit} title="Masuk" />
+            <Button
+              onClick={this.handleLoginSubmit}
+              title="Masuk"
+              loading={this.props.isLoading}
+            />
           </div>
         </div>
       </div>
@@ -59,4 +74,15 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const reduxState = state => ({
+  isLoading: state.isLoading
+});
+
+const reduxDispatch = dispatch => ({
+  userLoginAPI: data => dispatch(userLoginAPI(data))
+});
+
+export default connect(
+  reduxState,
+  reduxDispatch
+)(Login);

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { userRegisterAPI } from "../../../configs/redux/action";
 
 import "./Register.css";
 import Button from "../../../components/Button";
@@ -15,13 +17,19 @@ class Register extends Component {
     });
   };
 
-  handleRegisterSubmit = () => {
-    console.log("Email : ", this.state.email);
-    console.log("Password : ", this.state.password);
-    this.setState({
-      email: "",
-      password: ""
-    });
+  handleRegisterSubmit = async () => {
+    const { email, password } = this.state;
+    console.log("Email : ", email);
+    console.log("Password : ", password);
+
+    const res = await this.props.userRegisterAPI({ email, password });
+
+    if (res) {
+      this.setState({
+        email: "",
+        password: ""
+      });
+    }
   };
 
   render() {
@@ -51,7 +59,11 @@ class Register extends Component {
             <div className="garis-input"></div>
           </div>
           <div className="form-group">
-            <Button onClick={this.handleRegisterSubmit} title="Daftar" />
+            <Button
+              onClick={this.handleRegisterSubmit}
+              title="Daftar"
+              loading={this.props.isLoading}
+            />
           </div>
         </div>
       </div>
@@ -59,4 +71,15 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const reduxState = state => ({
+  isLoading: state.isLoading
+});
+
+const reduxDispatch = dispatch => ({
+  userRegisterAPI: data => dispatch(userRegisterAPI(data))
+});
+
+export default connect(
+  reduxState,
+  reduxDispatch
+)(Register);

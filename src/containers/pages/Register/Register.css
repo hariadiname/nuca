@@ -39,3 +39,17 @@
 .container .form .form-group .garis-input {
   border: 1px solid #75c4eb;
 }
+
+.btn,
+.btn-primary {
+  border: 0px solid;
+}
+
+.disable {
+  background: #acacac;
+}
+
+.disable:hover {
+  background: #acacac;
+  cursor: not-allowed;
+}
